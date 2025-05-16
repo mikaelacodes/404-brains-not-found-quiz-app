@@ -1,0 +1,21 @@
+{
+  "name": "404-brains-not-found-quiz-app",
+  "version": "1.0.0",
+  "description": "🚀 Immersion Day Challenge – Interactive Tech Quiz App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikaelacodes/404-brains-not-found-quiz-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mikaelacodes/404-brains-not-found-quiz-app/issues"
+  },
+  "homepage": "https://github.com/mikaelacodes/404-brains-not-found-quiz-app#readme"
+}
