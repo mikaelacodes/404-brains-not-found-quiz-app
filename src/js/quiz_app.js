@@ -9,18 +9,24 @@ class QuizApp {
   }
 
   init(categories, questionsByCategory) {
+    const adminCategories = JSON.parse(
+      localStorage.getItem("quizCategories") || "[]"
+    );
     const adminQuestions = JSON.parse(
-      localStorage.getItem("adminQuestions") || "{}"
+      localStorage.getItem("quizQuestions") || "{}"
     );
     this.categories = Array.from(
-      new Set([...categories, ...Object.keys(adminQuestions)])
+      new Set([...(categories || []), ...adminCategories])
     );
-    this.questionsByCategory = { ...questionsByCategory };
-    for (const cat in adminQuestions) {
+    this.questionsByCategory = { ...(questionsByCategory || {}) };
+    for (const cat of adminCategories) {
       if (!this.questionsByCategory[cat]) this.questionsByCategory[cat] = [];
-      this.questionsByCategory[cat] = this.questionsByCategory[cat].concat(
-        adminQuestions[cat]
-      );
+      const adminQs = (adminQuestions[cat] || []).map((q) => ({
+        question: q.question,
+        options: q.answers,
+        correct: q.correctAnswerIndex,
+      }));
+      this.questionsByCategory[cat] = adminQs;
     }
     this.renderStartScreen();
   }

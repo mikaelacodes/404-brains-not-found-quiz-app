@@ -123,7 +123,7 @@ class AdminPanel {
     });
   }
 
-  // --- QUESTION FORM SECTION ---
+  // --- This is the question form section ---
   renderQuestionForm() {
     const container = document.getElementById("question-form-section");
     container.innerHTML = `
@@ -141,6 +141,7 @@ class AdminPanel {
           <option value="2">Option 3</option>
           <option value="3">Option 4</option>
         </select>
+        <input type="number" id="timer-input" min="5" max="300" placeholder="Time (seconds) per question" />
         <button id="save-question-btn">Save Question</button>
       `;
 
@@ -153,11 +154,14 @@ class AdminPanel {
         document.getElementById(`option-${i}`).value.trim()
       );
       const correct = parseInt(document.getElementById("correct-select").value);
+      const timer = parseInt(document.getElementById("timer-input").value);
 
       if (!category) return alert(ERROR_MESSAGES.CATEGORY_REQUIRED);
       if (!question || options.some((opt) => !opt))
         return alert(ERROR_MESSAGES.QUESTION_REQUIRED);
       if (isNaN(correct)) return alert(ERROR_MESSAGES.INVALID_ANSWER_INDEX);
+      if (isNaN(timer) || timer < 5)
+        return alert("Please set a valid timer (min 5 seconds).");
 
       const list = this.questions[category] || [];
 
@@ -166,12 +170,18 @@ class AdminPanel {
           question,
           answers: options,
           correctAnswerIndex: correct,
+          timer,
         };
         this.state.editingIndex = null;
       } else {
         if (list.find((q) => q.question === question))
           return alert(ERROR_MESSAGES.DUPLICATE_QUESTION);
-        list.push({ question, answers: options, correctAnswerIndex: correct });
+        list.push({
+          question,
+          answers: options,
+          correctAnswerIndex: correct,
+          timer,
+        });
       }
 
       this.questions[category] = list;
@@ -188,9 +198,11 @@ class AdminPanel {
       (i) => (document.getElementById(`option-${i}`).value = "")
     );
     document.getElementById("correct-select").value = "";
+    const timerInput = document.getElementById("timer-input");
+    if (timerInput) timerInput.value = "";
   }
 
-  // --- SETTINGS SECTION ---
+  // --- This is the settings section ---
   renderSettingsSection() {
     const container = document.getElementById("settings-section");
     container.innerHTML = `
@@ -216,7 +228,7 @@ class AdminPanel {
     }
   }
 
-  // --- QUESTION LIST SECTION ---
+  // --- This is the question list section ---
   renderQuestionListSection() {
     const container = document.getElementById("question-list-section");
     container.innerHTML = `
@@ -269,6 +281,7 @@ class AdminPanel {
       (a, i) => (document.getElementById(`option-${i}`).value = a)
     );
     document.getElementById("correct-select").value = q.correctAnswerIndex;
+    if (q.timer) document.getElementById("timer-input").value = q.timer;
     this.state.editingIndex = index;
 
     window.scrollTo({ top: 0, behavior: "smooth" });
