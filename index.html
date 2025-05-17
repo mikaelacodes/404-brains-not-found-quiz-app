@@ -1,49 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="style.css" />
-        <title>Quiz App</title>
-    </head>
-    <body>
-        <div class=""container>
-            <div class="start-screen">
-                <h1 class="heading">Quiz App</h1>
-                <div class="settings">
-                    <label for="num-questions">Number of questions</label>
-                    <select name="" id="numOfQuestions">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                        <option value="25">25</option>
-                        <option value="30">30</option>
-                    </select>
-                    <br>
-                    <label for="category">Category</label>
-                    <select name="" id="category">
-                        <option value="1">OOP</option>
-                        <option value="2">HTML</option>
-                        <option value="3">Data Types</option>
-                        <option value="4">Functions</option>
-                        <option value="5">CSS</option>
-                        <option value="6">Javascript</option>
-                    </select>
-                    <br>
-                    <label for="time">Time per question</label>
-                    <select name="" id="time">
-                        <option value="5">5 Seconds</option>
-                        <option value="10">10 Seconds</option>
-                        <option value="15">15 Seconds</option>
-                        <option value="20">20 Seconds</option>
-                        <option value="25">25 Seconds</option>
-                        <option value="30">30 Seconds</option>
-                    </select>
-                </div>
-            </div>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 Brains Not Found Quiz App</title>
+    <link rel="stylesheet" href="src/css/styles.css" />
+  </head>
+  <body>
+    <div id="quiz-container"></div>
+    <script src="src/js/quiz_app.js"></script>
+    <script>
+      // Example categories and questions
+      const categories = ["JavaScript", "HTML", "CSS"];
+      const questionsByCategory = {
+        JavaScript: [
+          {
+            question: "What is a closure?",
+            options: [
+              "A function inside another",
+              "A variable",
+              "A loop",
+              "A string",
+            ],
+            correct: 0,
+          },
+          {
+            question: "Which keyword declares a constant?",
+            options: ["var", "let", "const", "static"],
+            correct: 2,
+          },
+        ],
+        HTML: [
+          {
+            question: "What does HTML stand for?",
+            options: [
+              "Hyper Trainer Marking Language",
+              "Hyper Text Markup Language",
+              "Hyper Text Marketing Language",
+              "Hyper Text Markup Leveler",
+            ],
+            correct: 1,
+          },
+          {
+            question: "Which tag creates a hyperlink?",
+            options: ["<a>", "<link>", "<href>", "<hyper>"],
+            correct: 0,
+          },
+        ],
+        CSS: [
+          {
+            question: "What does CSS stand for?",
+            options: [
+              "Cascading Style Sheets",
+              "Colorful Style Sheets",
+              "Computer Style Sheets",
+              "Creative Style Sheets",
+            ],
+            correct: 0,
+          },
+          {
+            question: "Which property changes text color?",
+            options: ["font-style", "color", "background", "text-align"],
+            correct: 1,
+          },
+        ],
+      };
 
-        <script src="script.js"></script>
-    </body>
-
+      // Initialize the app
+      document.addEventListener("DOMContentLoaded", function () {
+        window.quizApp = new QuizApp("quiz-container");
+        quizApp.init(categories, questionsByCategory);
+      });
+    </script>
+  </body>
 </html>
