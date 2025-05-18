@@ -4,73 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>404 Brains Not Found Quiz App</title>
-    <link rel="stylesheet" href="src/css/styles.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
   </head>
   <body>
-    <div id="quiz-container"></div>
-    <script src="src/js/quiz_app.js"></script>
-    <script>
-      // Example categories and questions
-      const categories = ["JavaScript", "HTML", "CSS"];
-      const questionsByCategory = {
-        JavaScript: [
-          {
-            question: "What is a closure?",
-            options: [
-              "A function inside another",
-              "A variable",
-              "A loop",
-              "A string",
-            ],
-            correct: 0,
-          },
-          {
-            question: "Which keyword declares a constant?",
-            options: ["var", "let", "const", "static"],
-            correct: 2,
-          },
-        ],
-        HTML: [
-          {
-            question: "What does HTML stand for?",
-            options: [
-              "Hyper Trainer Marking Language",
-              "Hyper Text Markup Language",
-              "Hyper Text Marketing Language",
-              "Hyper Text Markup Leveler",
-            ],
-            correct: 1,
-          },
-          {
-            question: "Which tag creates a hyperlink?",
-            options: ["<a>", "<link>", "<href>", "<hyper>"],
-            correct: 0,
-          },
-        ],
-        CSS: [
-          {
-            question: "What does CSS stand for?",
-            options: [
-              "Cascading Style Sheets",
-              "Colorful Style Sheets",
-              "Computer Style Sheets",
-              "Creative Style Sheets",
-            ],
-            correct: 0,
-          },
-          {
-            question: "Which property changes text color?",
-            options: ["font-style", "color", "background", "text-align"],
-            correct: 1,
-          },
-        ],
-      };
+    <div class="landing-page">
+    <h1>Welcome to the 404 Brains Not Found Quiz App</h1>
+    <button id="start-quiz" onclick="location.href='learner.html'">Learner</button>
+    <button id="admin" onclick="location.href='admin.html'">Admin</button>
+    <!-- <div id="quiz-container"></div>
+    <script src="src/js/quiz_app.js"></script> -->
+    </div>
 
-      // Initialize the app
-      document.addEventListener("DOMContentLoaded", function () {
-        window.quizApp = new QuizApp("quiz-container");
-        quizApp.init(categories, questionsByCategory);
-      });
-    </script>
   </body>
 </html>

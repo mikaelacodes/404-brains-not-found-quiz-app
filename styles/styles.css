@@ -1,0 +1,152 @@
+/* This is the admin styling */
+
+/* General page background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card container */
+.landing-page {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 300px;
+}
+
+/* Heading */
+.landing-page h1 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Buttons */
+.landing-page button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  background-color: #6a11cb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.landing-page button:hover {
+  background-color: #571ca0;
+}
+
+
+#admin-container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  padding: 32px 28px 40px 28px;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+
+h1 {
+  text-align: center;
+}
+
+h1,
+h2 {
+  color: #2c3e50;
+  margin-bottom: 18px;
+}
+
+section {
+  margin-bottom: 32px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  padding: 8px 10px;
+  margin: 6px 0 14px 0;
+  border: 1px solid #bfc9d1;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border 0.2s;
+}
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border: 1.5px solid #3498db;
+  outline: none;
+}
+
+button {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-top: 4px;
+  transition: background 0.2s;
+}
+button:hover {
+  background: #217dbb;
+}
+
+#category-list,
+#question-list {
+  list-style: none;
+  padding: 0;
+}
+#category-list li,
+#question-list li {
+  background: #f7fafd;
+  border: 1px solid #e1e8ed;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#category-list li button,
+#question-list li button {
+  margin-left: 8px;
+}
+
+#question-list li strong {
+  color: #34495e;
+}
+
+#question-list li em {
+  color: #27ae60;
+  font-style: normal;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  #admin-container {
+    padding: 12px 4px 24px 4px;
+  }
+  h1,
+  h2 {
+    font-size: 1.2rem;
+  }
+}

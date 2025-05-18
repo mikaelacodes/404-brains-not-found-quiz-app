@@ -1,0 +1,39 @@
+<!-- learner.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Take the Quiz</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+<div class="landing-page">
+  <div id="start-section">
+    <h2>Enter Your Name</h2>
+    <input type="text" id="username" placeholder="Your Name" />
+    <select id="category">
+      <option value="javascript">JavaScript</option>
+      <option value="html">HTML</option>
+      <option value="css">CSS</option>
+    </select>
+    <button id="start-btn">Start Quiz</button>
+  </div>
+
+  <div id="quiz-section" style="display: none;">
+    <h2 id="question-title"></h2>
+    <ul id="answers-list"></ul>
+    <div>
+      <p>Time left: <span id="timer">10</span>s</p>
+      <progress id="progress-bar" value="0" max="100"></progress>
+    </div>
+  </div>
+
+  <div id="result-section" style="display: none;">
+    <h2>Quiz Complete!</h2>
+    <p id="score-output"></p>
+    <button onclick="location.reload()">Try Again</button>
+  </div>
+</div>
+  <script src="src/scripts/learner.js"></script>
+</body>
+</html>
