@@ -1,81 +1,44 @@
-/* This is the admin styling */
-
-/* General page background */
-body {
+* {
+  box-sizing: border-box;
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-/* Card container */
-.landing-page {
+body {
+  font-family: sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+#admin-container {
   background: #fff;
   padding: 2rem;
   border-radius: 16px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 300px;
-}
-
-/* Heading */
-.landing-page h1 {
-  font-size: 1.4rem;
-  margin-bottom: 1.5rem;
-  color: #333;
-}
-
-/* Buttons */
-.landing-page button {
-  display: block;
   width: 100%;
-  padding: 0.75rem;
-  margin: 0.5rem 0;
-  font-size: 1rem;
-  background-color: #6a11cb;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-.instruction-container{
-  transition: background 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-.instruction-block{
-  background-color: white;
-  border-radius: 15px;
   max-width: 700px;
-}
-.landing-page button:hover {
-  background-color: #571ca0;
+  min-height: 80vh;
+  margin-top: 2rem;
+  overflow-y: auto;
 }
 
-
-#admin-container {
-  max-width: 700px;
-  margin: 40px auto;
+.card-container {
   background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
-  padding: 32px 28px 40px 28px;
-  font-family: "Segoe UI", Arial, sans-serif;
-}
-
-ol li span{
-  font-weight: bold;
-}
-
-h1 {
-  text-align: center;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 700px;
+  min-height: 80vh;
+  margin: 2rem auto 0 auto;
+  overflow-y: auto;
 }
 
 h1,
@@ -84,87 +47,84 @@ h2 {
   margin-bottom: 18px;
 }
 
-section {
-  margin-bottom: 32px;
+button {
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 8px 4px 12px 0;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #217dbb;
 }
 
 input[type="text"],
 input[type="number"],
 select {
-  padding: 8px 10px;
-  margin: 6px 0 14px 0;
-  border: 1px solid #bfc9d1;
-  border-radius: 5px;
   width: 100%;
-  font-size: 1rem;
-  box-sizing: border-box;
-  transition: border 0.2s;
-}
-input[type="text"]:focus,
-input[type="number"]:focus,
-select:focus {
-  border: 1.5px solid #3498db;
-  outline: none;
-}
-
-button {
-  background: #3498db;
-  color: #fff;
-  border: none;
+  padding: 10px;
+  margin: 8px 0 16px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 8px 18px;
   font-size: 1rem;
-  cursor: pointer;
-  margin-right: 8px;
-  margin-top: 4px;
-  transition: background 0.2s;
-}
-button:hover {
-  background: #217dbb;
 }
 
-#category-list,
-#question-list {
+select {
+  appearance: none;
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3Csvg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 16px;
+}
+
+ul {
   list-style: none;
   padding: 0;
 }
-#category-list li,
-#question-list li {
+
+li {
   background: #f7fafd;
   border: 1px solid #e1e8ed;
   border-radius: 6px;
+  padding: 12px;
   margin-bottom: 10px;
-  padding: 12px 16px;
+}
+
+.landing-page {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-}
-#category-list li button,
-#question-list li button {
-  margin-left: 8px;
 }
 
-#question-list li strong {
-  color: #34495e;
-}
-
-#question-list li em {
-  color: #27ae60;
-  font-style: normal;
-  font-weight: bold;
-}
-.leader-contain{
-  background-color: white;
-  border-radius: 15px;
-  width: 600px;
-  text-align: center;
+.landing-page button {
+  margin: 0.5rem 0;
+  width: 200px;
 }
 @media (max-width: 600px) {
-  #admin-container {
-    padding: 12px 4px 24px 4px;
-  }
   h1,
   h2 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+
+  select {
+    background-position: right 10px center;
   }
 }
