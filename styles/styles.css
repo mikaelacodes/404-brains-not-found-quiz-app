@@ -43,7 +43,18 @@ body {
   cursor: pointer;
   transition: background 0.3s ease;
 }
-
+.instruction-container{
+  transition: background 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.instruction-block{
+  background-color: white;
+  border-radius: 15px;
+  max-width: 700px;
+}
 .landing-page button:hover {
   background-color: #571ca0;
 }
@@ -59,7 +70,9 @@ body {
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-
+ol li span{
+  font-weight: bold;
+}
 
 h1 {
   text-align: center;
