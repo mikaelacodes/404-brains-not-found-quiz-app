@@ -153,7 +153,12 @@ button:hover {
   font-style: normal;
   font-weight: bold;
 }
-
+.leader-contain{
+  background-color: white;
+  border-radius: 15px;
+  width: 600px;
+  text-align: center;
+}
 @media (max-width: 600px) {
   #admin-container {
     padding: 12px 4px 24px 4px;
