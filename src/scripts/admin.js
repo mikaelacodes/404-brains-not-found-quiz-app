@@ -157,8 +157,13 @@ class AdminPanel {
     list.innerHTML = "";
     this.state.categories.forEach((cat) => {
       const li = document.createElement("li");
+      li.style.display = "flex";
+      li.style.justifyContent = "space-between";
+      li.style.alignItems = "center";
+      li.style.marginBottom = "8px";
       li.innerHTML = `
-        ${cat} <button data-cat="${cat}" class="delete-category-btn">Delete</button>
+        <span>${cat}</span>
+        <button data-cat="${cat}" class="delete-category-btn" style="background: #e74c3c; color: #fff; border: none; border-radius: 4px; padding: 4px 12px; margin-left: 12px; cursor: pointer;">Delete</button>
       `;
       li.querySelector(".delete-category-btn").onclick = () => {
         if (confirm(`Delete category '${cat}' and its questions?`)) {
