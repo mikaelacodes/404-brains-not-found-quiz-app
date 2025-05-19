@@ -22,12 +22,28 @@ document.addEventListener("DOMContentLoaded", () => {
     </thead>
     <tbody>`;
   scores.slice(0, 10).forEach((entry, i) => {
-    html += `<tr style='background:${i%2===0?"#eaf0fb":"#fff"};'>
-      <td style='padding:10px 8px;text-align:center;font-weight:bold;'>${i + 1}</td>
+    let scoreDisplay = entry.score;
+    if (typeof entry.total === "number") {
+      scoreDisplay = `${entry.score} / ${entry.total}`;
+    }
+    html += `<tr style='background:${i % 2 === 0 ? "#eaf0fb" : "#fff"};'>
+      <td style='padding:10px 8px;text-align:center;font-weight:bold;'>${
+        i + 1
+      }</td>
       <td style='padding:10px 8px;'>${entry.name}</td>
-      <td style='padding:10px 8px;text-align:center;'>${entry.score}</td>
+      <td style='padding:10px 8px;text-align:center;'>${scoreDisplay}</td>
     </tr>`;
   });
   html += `</tbody></table>`;
   leaderboardDiv.innerHTML = html;
 });
+
+// Utility: Clear leaderboard and quiz data (for admin/testing)
+window.clearQuizDB = function () {
+  localStorage.removeItem("highScores");
+  localStorage.removeItem("quizQuestions");
+  localStorage.removeItem("quizCategories");
+  localStorage.removeItem("quizCategorySettings");
+  alert("Quiz data and leaderboard cleared!");
+  location.reload();
+};

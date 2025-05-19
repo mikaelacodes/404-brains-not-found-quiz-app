@@ -249,6 +249,10 @@ function endQuiz() {
   // Save score to high scores
   const name = usernameInput.value.trim();
   const scores = JSON.parse(localStorage.getItem("highScores")) || [];
-  scores.push({ name, score });
+  scores.push({ name, score, total: questions.length });
   localStorage.setItem("highScores", JSON.stringify(scores));
+  // Redirect to leaderboard after short delay
+  setTimeout(() => {
+    window.location.href = "leaderboard.html";
+  }, 1000);
 }
