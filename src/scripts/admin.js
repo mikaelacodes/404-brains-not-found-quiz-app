@@ -113,8 +113,8 @@ class AdminPanel {
     this.root.innerHTML = `
       <h1>Admin Panel</h1>
       <section id="category-section"></section>
-      <section id="question-form-section"></section>
       <section id="settings-section"></section>
+      <section id="question-form-section"></section>
       <section id="question-list-section"></section>
     `;
 
