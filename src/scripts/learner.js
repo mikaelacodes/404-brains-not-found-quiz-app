@@ -27,6 +27,7 @@ const questionTitle = document.getElementById("question-title");
 const answersList = document.getElementById("answers-list");
 const timerDisplay = document.getElementById("timer");
 const progressBar = document.getElementById("progress-bar");
+const progressText = document.getElementById("progress-text");
 
 let questions = [];
 let current = 0;
@@ -52,6 +53,31 @@ startBtn.addEventListener("click", () => {
         ],
         correct: "A function with preserved data from its lexical scope",
       },
+      {
+        text: "Which of the following is NOT a JavaScript data type?",
+        answers: ["Number", "Boolean", "Float", "String"],
+        correct: "Float",
+      },
+      {
+        text: "What does 'this' keyword refer to in a regular function?",
+        answers: [
+          "The global object",
+          "The function itself",
+          "The parent object",
+          "The previous variable",
+        ],
+        correct: "The global object",
+      },
+      {
+        text: "Which method is used to parse a JSON string into a JavaScript object?",
+        answers: [
+          "JSON.parse()",
+          "JSON.stringify()",
+          "parse.JSON()",
+          "stringify.JSON()",
+        ],
+        correct: "JSON.parse()",
+      },
     ],
     HTML: [
       {
@@ -64,12 +90,42 @@ startBtn.addEventListener("click", () => {
         ],
         correct: "HyperText Markup Language",
       },
+      {
+        text: "Which HTML tag is used to create a hyperlink?",
+        answers: ["<a>", "<link>", "<href>", "<hyper>"],
+        correct: "<a>",
+      },
+      {
+        text: "Which tag is used to display an image in HTML?",
+        answers: ["<img>", "<image>", "<src>", "<pic>"],
+        correct: "<img>",
+      },
+      {
+        text: "What is the correct HTML element for inserting a line break?",
+        answers: ["<br>", "<break>", "<lb>", "<newline>"],
+        correct: "<br>",
+      },
     ],
     CSS: [
       {
         text: "Which CSS property controls text size?",
         answers: ["font-size", "text-style", "font-weight", "size"],
         correct: "font-size",
+      },
+      {
+        text: "Which property is used to change the background color?",
+        answers: ["background-color", "color", "bgcolor", "background-style"],
+        correct: "background-color",
+      },
+      {
+        text: "How do you select an element with id 'header'?",
+        answers: ["#header", ".header", "header", "*header*"],
+        correct: "#header",
+      },
+      {
+        text: "Which CSS property is used to make text bold?",
+        answers: ["font-weight", "font-style", "bold", "text-weight"],
+        correct: "font-weight",
       },
     ],
   };
@@ -126,6 +182,12 @@ startBtn.addEventListener("click", () => {
   loadQuestion();
 });
 
+function updateProgressBar(current, total) {
+  const percentage = Math.round((current / total) * 100);
+  if (progressBar) progressBar.value = percentage;
+  if (progressText) progressText.textContent = `${percentage}%`;
+}
+
 function loadQuestion() {
   if (current >= questions.length) return endQuiz();
 
@@ -143,7 +205,7 @@ function loadQuestion() {
   timePerQuestion = q.timer || 10;
   let timeLeft = timePerQuestion;
   timerDisplay.textContent = timeLeft;
-  progressBar.value = (current / questions.length) * 100;
+  updateProgressBar(current, questions.length);
 
   clearInterval(timer);
   timer = setInterval(() => {
@@ -174,12 +236,16 @@ function endQuiz() {
   questions.forEach((q, i) => {
     const userAns = userAnswers[i];
     const isCorrect = userAns === q.correct;
-    resultsHtml += `<li><strong>Q${i + 1}:</strong> ${q.text}<br>` +
-      `<span style='color:${isCorrect ? "#27ae60" : "#e74c3c"};'>Your answer: ${userAns !== null ? userAns : "(No answer)"}</span><br>` +
+    resultsHtml +=
+      `<li><strong>Q${i + 1}:</strong> ${q.text}<br>` +
+      `<span style='color:${isCorrect ? "#27ae60" : "#e74c3c"};'>Your answer: ${
+        userAns !== null ? userAns : "(No answer)"
+      }</span><br>` +
       `<span style='color:#3498db;'>Correct answer: ${q.correct}</span></li><br>`;
   });
   resultsHtml += "</ul>";
-  document.getElementById("result-section").innerHTML = resultsHtml + `<button onclick='location.reload()'>Try Again</button>`;
+  document.getElementById("result-section").innerHTML =
+    resultsHtml + `<button onclick='location.reload()'>Try Again</button>`;
   // Save score to high scores
   const name = usernameInput.value.trim();
   const scores = JSON.parse(localStorage.getItem("highScores")) || [];

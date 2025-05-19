@@ -303,32 +303,40 @@ class AdminPanel {
     `;
 
     // Populate category select
-    const settingsCategorySelect = document.getElementById("settings-category-select");
-    settingsCategorySelect.innerHTML = '';
+    const settingsCategorySelect = document.getElementById(
+      "settings-category-select"
+    );
     this.state.categories.forEach((cat) => {
-      const option = document.createElement('option');
-      option.value = cat;
-      option.textContent = cat;
+      const option = new Option(cat, cat);
       settingsCategorySelect.appendChild(option);
     });
 
     // Load value if exists
     settingsCategorySelect.onchange = () => {
       const cat = settingsCategorySelect.value;
-      const perCatSettings = JSON.parse(localStorage.getItem("quizCategorySettings") || "{}");
-      document.getElementById("question-count").value = perCatSettings[cat] || "";
+      const perCatSettings = JSON.parse(
+        localStorage.getItem("quizCategorySettings") || "{}"
+      );
+      document.getElementById("question-count").value =
+        perCatSettings[cat] || "";
     };
     // Trigger initial load
-    if (this.state.categories.length) settingsCategorySelect.dispatchEvent(new Event('change'));
+    if (this.state.categories.length) settingsCategorySelect.onchange();
 
     document.getElementById("save-settings-btn").onclick = () => {
       const cat = settingsCategorySelect.value;
       const count = parseInt(document.getElementById("question-count").value);
       if (!cat) return alert("Select a category to set settings for.");
-      if (!count || count < 1) return alert(ERROR_MESSAGES.INVALID_QUESTION_COUNT);
-      const perCatSettings = JSON.parse(localStorage.getItem("quizCategorySettings") || "{}");
+      if (!count || count < 1)
+        return alert(ERROR_MESSAGES.INVALID_QUESTION_COUNT);
+      const perCatSettings = JSON.parse(
+        localStorage.getItem("quizCategorySettings") || "{}"
+      );
       perCatSettings[cat] = count;
-      localStorage.setItem("quizCategorySettings", JSON.stringify(perCatSettings));
+      localStorage.setItem(
+        "quizCategorySettings",
+        JSON.stringify(perCatSettings)
+      );
       alert(`Settings saved for ${cat}!`);
     };
   }
