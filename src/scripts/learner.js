@@ -33,6 +33,7 @@ let current = 0;
 let score = 0;
 let timer = null;
 let timePerQuestion = 10;
+let userAnswers = [];
 
 startBtn.addEventListener("click", () => {
   const name = usernameInput.value.trim();
@@ -77,7 +78,7 @@ startBtn.addEventListener("click", () => {
   const allQs = JSON.parse(localStorage.getItem("quizQuestions")) || {};
   let catQs = allQs[category] || [];
 
-  // Convert admin-format to uniform format
+  // Convert admin-format to uniform format (including timer)
   catQs = catQs
     .map((q) => {
       if (q.question && q.answers && typeof q.correctAnswerIndex === "number") {
@@ -85,9 +86,14 @@ startBtn.addEventListener("click", () => {
           text: q.question,
           answers: q.answers,
           correct: q.answers[q.correctAnswerIndex],
+          timer: q.timer, // pass timer to learner
         };
       } else if (q.text && q.answers && q.correct) {
-        return q;
+        // If timer exists, keep it
+        return {
+          ...q,
+          timer: q.timer || 10,
+        };
       }
       return null;
     })
@@ -104,8 +110,16 @@ startBtn.addEventListener("click", () => {
   }
 
   // ✅ Use correct key for question count from admin settings
-  const count = parseInt(localStorage.getItem("quizQuestionCount")) || 5;
+  // Get the per-category question count
+  const perCatSettings = JSON.parse(
+    localStorage.getItem("quizCategorySettings") || "{}"
+  );
+  const count = perCatSettings[category]
+    ? parseInt(perCatSettings[category])
+    : 5;
   questions = catQs.sort(() => Math.random() - 0.5).slice(0, count);
+
+  userAnswers = [];
 
   document.getElementById("start-section").style.display = "none";
   document.getElementById("quiz-section").style.display = "block";
@@ -137,6 +151,7 @@ function loadQuestion() {
     timerDisplay.textContent = timeLeft;
     if (timeLeft <= 0) {
       clearInterval(timer);
+      userAnswers.push(null); // No answer selected
       current++;
       loadQuestion();
     }
@@ -146,7 +161,7 @@ function loadQuestion() {
 function checkAnswer(selected) {
   const correct = questions[current].correct;
   if (selected === correct) score++;
-
+  userAnswers.push(selected);
   current++;
   loadQuestion();
 }
@@ -155,10 +170,16 @@ function endQuiz() {
   clearInterval(timer);
   document.getElementById("quiz-section").style.display = "none";
   document.getElementById("result-section").style.display = "block";
-  document.getElementById(
-    "score-output"
-  ).textContent = `Your score: ${score} / ${questions.length}`;
-
+  let resultsHtml = `<h2>Quiz Complete!</h2><p>Your score: ${score} / ${questions.length}</p><ul style='text-align:left;'>`;
+  questions.forEach((q, i) => {
+    const userAns = userAnswers[i];
+    const isCorrect = userAns === q.correct;
+    resultsHtml += `<li><strong>Q${i + 1}:</strong> ${q.text}<br>` +
+      `<span style='color:${isCorrect ? "#27ae60" : "#e74c3c"};'>Your answer: ${userAns !== null ? userAns : "(No answer)"}</span><br>` +
+      `<span style='color:#3498db;'>Correct answer: ${q.correct}</span></li><br>`;
+  });
+  resultsHtml += "</ul>";
+  document.getElementById("result-section").innerHTML = resultsHtml + `<button onclick='location.reload()'>Try Again</button>`;
   // Save score to high scores
   const name = usernameInput.value.trim();
   const scores = JSON.parse(localStorage.getItem("highScores")) || [];

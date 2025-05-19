@@ -223,7 +223,21 @@ class AdminPanel {
       );
       const correct = parseInt(document.getElementById("correct-select").value);
       const timer = parseInt(document.getElementById("timer-input").value);
-
+      // Category-specific settings
+      const perCatSettings = JSON.parse(
+        localStorage.getItem("quizCategorySettings") || "{}"
+      );
+      const questionCount = perCatSettings[category];
+      if (
+        !questionCount ||
+        isNaN(parseInt(questionCount)) ||
+        parseInt(questionCount) < 1
+      ) {
+        alert(
+          "Please set the number of questions for this category in Category Settings before adding questions."
+        );
+        return;
+      }
       if (!category) return alert(ERROR_MESSAGES.CATEGORY_REQUIRED);
       if (!question || options.some((opt) => !opt))
         return alert(ERROR_MESSAGES.QUESTION_REQUIRED);
@@ -232,6 +246,13 @@ class AdminPanel {
         return alert("Please set a valid timer (min 5 seconds).");
 
       const list = this.questions[category] || [];
+      const maxQuestions = parseInt(questionCount);
+      if (this.state.editingIndex === null && list.length >= maxQuestions) {
+        alert(
+          `You can only add up to ${maxQuestions} questions for this category.`
+        );
+        return;
+      }
 
       if (this.state.editingIndex !== null) {
         list[this.state.editingIndex] = {
@@ -273,18 +294,42 @@ class AdminPanel {
   renderSettingsSection() {
     const container = document.getElementById("settings-section");
     container.innerHTML = `
-      <h2>Quiz Settings</h2>
-      <label>Questions per quiz:</label>
+      <h2>Category Settings</h2>
+      <label for="settings-category-select">Select Category:</label>
+      <select id="settings-category-select"></select>
+      <label>Questions allowed for this category:</label>
       <input type="number" id="question-count" min="1" max="50">
       <button id="save-settings-btn">Save</button>
     `;
 
+    // Populate category select
+    const settingsCategorySelect = document.getElementById("settings-category-select");
+    settingsCategorySelect.innerHTML = '';
+    this.state.categories.forEach((cat) => {
+      const option = document.createElement('option');
+      option.value = cat;
+      option.textContent = cat;
+      settingsCategorySelect.appendChild(option);
+    });
+
+    // Load value if exists
+    settingsCategorySelect.onchange = () => {
+      const cat = settingsCategorySelect.value;
+      const perCatSettings = JSON.parse(localStorage.getItem("quizCategorySettings") || "{}");
+      document.getElementById("question-count").value = perCatSettings[cat] || "";
+    };
+    // Trigger initial load
+    if (this.state.categories.length) settingsCategorySelect.dispatchEvent(new Event('change'));
+
     document.getElementById("save-settings-btn").onclick = () => {
+      const cat = settingsCategorySelect.value;
       const count = parseInt(document.getElementById("question-count").value);
-      if (!count || count < 1)
-        return alert(ERROR_MESSAGES.INVALID_QUESTION_COUNT);
-      localStorage.setItem("quizQuestionCount", count);
-      alert("Settings saved!");
+      if (!cat) return alert("Select a category to set settings for.");
+      if (!count || count < 1) return alert(ERROR_MESSAGES.INVALID_QUESTION_COUNT);
+      const perCatSettings = JSON.parse(localStorage.getItem("quizCategorySettings") || "{}");
+      perCatSettings[cat] = count;
+      localStorage.setItem("quizCategorySettings", JSON.stringify(perCatSettings));
+      alert(`Settings saved for ${cat}!`);
     };
   }
 
