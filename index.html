@@ -9,14 +9,34 @@
   <body>
     <div class="card-container">
       <div class="landing-page">
-        <h1>Welcome to the 404 Brains Not Found Quiz App</h1>
-        <button id="start-quiz" onclick="location.href='instructions.html'">
-          Learner
-        </button>
-        <button id="admin" onclick="location.href='admin.html'">Admin</button>
-        <button id="instructions" onclick="location.href='instructions.html'">
-          Instruction
-        </button>
+        <h1 style="margin-top: 10px; text-align: center">
+          Welcome to the 404 Brains Not Found Quiz App
+        </h1>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+          "
+        >
+          <button
+            id="start-quiz"
+            onclick="location.href='instructions.html'"
+            style="margin: 10px 0"
+          >
+            Learner
+          </button>
+          <button
+            id="admin"
+            onclick="location.href='admin.html'"
+            style="margin: 10px 0"
+          >
+            Admin
+          </button>
+        </div>
+
         <!-- <div id="quiz-container"></div>
     <script src="src/js/quiz_app.js"></script> -->
       </div>
