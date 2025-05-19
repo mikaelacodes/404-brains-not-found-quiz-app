@@ -63,7 +63,7 @@ button:hover {
 
 input[type="text"],
 input[type="number"],
-select {
+select,#admin-password{
   width: 100%;
   padding: 10px;
   margin: 8px 0 16px;
