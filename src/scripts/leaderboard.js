@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const scores = JSON.parse(localStorage.getItem("highScores")) || [];
   if (scores.length === 0) {
     leaderboardDiv.innerHTML =
-      "<p>No scores yet. Be the first to take the quiz!</p>";
+      '<p style="text-align:center;">No scores yet. Be the first to take the quiz!</p>';
     return;
   }
 

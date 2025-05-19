@@ -14,7 +14,7 @@
           <h2>Admin Login</h2>
           <input type="text" id="admin-username" placeholder="Username" />
           <input type="password" id="admin-password" placeholder="Password" />
-          <button id="admin-login-btn">Login</button>
+          <button id="admin-login-btn" style="text-align: center">Login</button>
           <p id="login-error" style="color: red"></p>
         </div>
 
@@ -22,14 +22,14 @@
         <div id="admin-panel" style="display: none">
           <div id="admin-container"></div>
         </div>
-        <button
-          onclick="localStorage.clear(); alert('localStorage cleared!'); location.reload();"
-        >
-          Reset All Quiz Data
-        </button>
 
         <div style="text-align: center; margin-top: 24px">
-          <button onclick="location.href='index.html'">Back to Home</button>
+          <button
+            onclick="location.href='index.html'"
+            style="margin: 0 auto; display: block"
+          >
+            Back to Home
+          </button>
         </div>
       </div>
     </div>
